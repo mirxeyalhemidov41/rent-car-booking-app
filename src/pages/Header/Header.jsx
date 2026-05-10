@@ -35,9 +35,9 @@ export const Header = () => {
         </NavLink>
       </nav>
       <div className="flex items-center gap-x-6">
-        <button className="cursor-pointer text-xl" onClick={() => alert("Səbətiniz boşdur!")}>
+        <NavLink to={ROUTES.BASKET} className="text-xl">
           <FaShoppingCart />
-        </button>
+        </NavLink>
 
         <div>
           <button className="cursor-pointer">Daxil ol</button>
