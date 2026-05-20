@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import logo from "../../../public/logo.png";
 import { NavLink } from "react-router";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { ROUTES } from "../../utils/const";
 import { MessageContent } from "../../components/Mesage/MessageProvider";
+import { FaCircleUser } from "react-icons/fa6";
 
 export const Header = () => {
-  const { basket } = useContext(MessageContent)
+  const { basket } = useContext(MessageContent);
+
+  const token = localStorage.getItem("token");
 
   return (
-    <div className="flex justify-between items-center py-2">
+    <div className="w-full bg-white fixed top-0 left-0 z-50 shadow-lg">
+      <div className="max-w-[1440px] mx-auto px-4 flex  justify-between items-center py-2">
       <img className="w-30" src={logo} alt="logo" />
       <nav className=" hidden lg:flex md:flex items-center gap-x-10">
         <NavLink
@@ -46,10 +50,32 @@ export const Header = () => {
           </span>
         </NavLink>
 
-        <div>
-          <button className="cursor-pointer">Daxil ol</button>
-        </div>
+        {token ? (
+          <NavLink
+            to={ROUTES.PROFILE}
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-4 h-11 rounded-xl border duration-200 font-medium ${
+                isActive
+                  ? "bg-blue-600 border-blue-600 text-white"
+                  : "border-gray-300 text-gray-700 hover:border-blue-500 hover:text-blue-600"
+              }`
+            }
+          >
+            <FaCircleUser className="text-lg" />
+
+            <span>Profil</span>
+          </NavLink>
+        ) : (
+          <NavLink
+            to={ROUTES.LOGIN}
+            className="flex items-center gap-2 px-4 h-11 rounded-xl border border-gray-300 hover:border-blue-500 hover:text-blue-600 duration-200 text-gray-700 font-medium"
+          >
+            <FaUser className="text-sm" />
+            Giriş
+          </NavLink>
+        )}
       </div>
+    </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const Home = () => {
  
   return (
     <div>
-      <section>
+      <section className="pt-19">
         <div
           className="h-150 bg-center bg-no-repeat bg-cover py-30 px-10"
           style={{ backgroundImage: `url(${banner})` }}
