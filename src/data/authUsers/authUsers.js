@@ -1,6 +1,6 @@
-export const authUsers = [
-  {
-    email: "mirxeyal@gmail.com",
-    password: 1234,
-  },
-];
+export const authUsers = {
+  email: "admin@gmail.com",
+  password: 1234,
+};
+
+export default authUsers;

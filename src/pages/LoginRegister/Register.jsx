@@ -15,7 +15,7 @@ export const Register = () => {
     const token = localStorage.getItem("token")
 
     if(token){
-      navigate(ROUTES.HOME)
+      navigate(ROUTES.PROFILE)
     }
   }, []);
 

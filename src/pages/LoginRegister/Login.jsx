@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { data, NavLink, useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
+import { authUsers } from "../../data/authUsers/authUsers";
 
 export const Login = () => {
   const [names, setNames] = useState("");
@@ -23,28 +24,41 @@ export const Login = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const admin = localStorage.getItem("admin");
 
     if (token) {
-      navigate(ROUTES.HOME);
+      navigate(ROUTES.PROFILE);
+    } else {
+      navigate(ROUTES.LOGIN);
+    }
+    if (admin) {
+      navigate(ROUTES.STATISTICS);
     }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (email == authUsers.email && password == authUsers.password) {
+      localStorage.setItem("admin", JSON.stringify("admin"));
+      navigate(ROUTES.STATISTICS);
+    }
+    const admin = localStorage.getItem("admin");
+
     authUser.map((data) => {
       if (email == data.email && password == data.password) {
         localStorage.setItem("token", JSON.stringify("usertoken"));
       }
     });
     const token = JSON.parse(localStorage.getItem("token"));
-
-    if (token == "usertoken") {
+    if (token) {
       navigate(ROUTES.HOME);
-    } else {
+    } else if (!token) {
       alert("Daxil etdiyiniz email və ya şifrə yanlışdır!");
-      setEmail("");
-      setPasssword("");
     }
+
+    setEmail("");
+    setPasssword("");
   };
 
   return (
@@ -126,3 +140,7 @@ export const Login = () => {
     </div>
   );
 };
+
+
+
+

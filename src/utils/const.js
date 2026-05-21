@@ -5,5 +5,14 @@ export const ROUTES = {
   BASKET: "/səbət",
   LOGIN: "/login",
   REGISTER: "/register",
-  PROFILE: "/profile"
+  PROFILE: "/profile",
+  ADMIN: "/admin",
+  STATISTICS: "/admin/MasinElaveEt",
+  NOTFOUND: "/*",
+};
+
+export const ADMIN_ROUTES = {
+  ADDCAR: "MasinElaveEt",
+  ALLCARS: "ButunMasinlar",
+  LOGOUT: "Cixis",
 };

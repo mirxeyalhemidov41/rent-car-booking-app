@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { FaUser, FaEnvelope, FaLock, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
+import { Logout } from "../../components/Logout/Logout";
 
 export const Profile = () => {
   const navigate = useNavigate();
-    useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -16,15 +17,6 @@ export const Profile = () => {
   const Users = JSON.parse(localStorage.getItem("User"));
   const ProfileId = JSON.parse(localStorage.getItem("ProfileId"));
   const ProfilUsers = Users.find((item) => item.id == ProfileId);
-
-  const handleClick = () => {
-    localStorage.removeItem("token");
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate(ROUTES.HOME);
-    }
-  };
 
   return (
     <div className="min-h-screen  px-4 py-10 flex items-center justify-center">
@@ -84,15 +76,12 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-
-        <button
-          className="w-full h-14 mt-8 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium text-lg flex items-center justify-center gap-3"
-          onClick={handleClick}
-        >
-          <FaSignOutAlt />
-          Çıxış et
-        </button>
+        <div className="w-full mt-8 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium text-lg  flex items-center justify-center">
+          <Logout adminToken={"token"} />
+        </div>
       </div>
     </div>
   );
 };
+
+
