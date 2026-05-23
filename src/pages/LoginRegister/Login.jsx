@@ -91,6 +91,7 @@ export const Login = () => {
                 className="w-full h-full outline-none px-3 text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -113,6 +114,7 @@ export const Login = () => {
                 className="w-full h-full outline-none px-3 text-sm"
                 value={password}
                 onChange={(e) => setPasssword(e.target.value)}
+                required
               />
             </div>
           </div>

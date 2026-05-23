@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { MessageContent } from "../Mesage/MessageProvider";
+import { MessageContent } from "../../components/ContextApi/MessageProvider";
 import { data, NavLink } from "react-router";
 import { ROUTES } from "../../utils/const";
 
@@ -68,7 +68,7 @@ export const Basget = () => {
     setBasket(data);
   }, []);
 
-  const HandleClick = (e) => {
+  const HandleDelete = (e) => {
     const data = JSON.parse(localStorage.getItem("selectedCars") || []);
     const exists = data.find((item) => item.id === e);
     const updated = data.filter((item) => item.id !== e);
@@ -89,7 +89,7 @@ export const Basget = () => {
 
   const message = `
 Salam.
-Maşın götürmək etmək istəyirəm.
+Maşın götürmək istəyirəm.
 Maşın sayı: ${selectedCars.length}
 Maşın adı: ${selectedCars?.map((item) => {
     return item.name;
@@ -100,7 +100,7 @@ Maşın adı: ${selectedCars?.map((item) => {
 
   return (
     <div>
-      <div className="py-10 min-h-screen">
+      <div className="py-10 mt-0 md:mt-20 lg:mt-20 min-h-screen">
         <div className="max-w-[1440px] mx-auto px-4">
           <div className="mb-8">
             <p className="text-gray-400 text-sm mb-2">Ana Səhifə / Səbət</p>
@@ -153,7 +153,7 @@ Maşın adı: ${selectedCars?.map((item) => {
 
                       <button
                         className="text-3xl text-gray-400 hover:text-blue-500 duration-200 cursor-pointer"
-                        onClick={() => HandleClick(car.id)}
+                        onClick={() => HandleDelete(car.id)}
                       >
                         ×
                       </button>

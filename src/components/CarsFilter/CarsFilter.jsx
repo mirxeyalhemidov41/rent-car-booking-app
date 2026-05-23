@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Cars from "../../data/CarsArr";
-import { MessageContent } from "../../components/Mesage/MessageProvider";
+import { MessageContent } from "../../components/ContextApi/MessageProvider";
 import {
   FaCogs,
   FaGasPump,

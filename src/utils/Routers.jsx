@@ -5,7 +5,7 @@ import { Cars } from "../pages/Cars/Cars";
 import { AboutUs } from "../pages/AboutUs/AboutUs";
 import { ADMIN_ROUTES, ROUTES } from "./const";
 import { Login } from "../pages/LoginRegister/Login";
-import { Basget } from "../components/Basket/Basget";
+import { Basget } from "../pages/Basket/Basget";
 import { Profile } from "../pages/LoginRegister/Profile";
 import { NotFound } from "../pages/NotFound/NotFound";
 import Admin from "../Admin/Admin";

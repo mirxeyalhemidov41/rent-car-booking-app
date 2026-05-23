@@ -18,7 +18,9 @@ export const Sidebar = () => {
           <li>
             <NavLink
               to={ADMIN_ROUTES.ADDCAR}
-              className="h-14 px-5 rounded-2xl flex items-center gap-4 text-gray-700 hover:bg-blue-600 hover:text-white duration-200 font-medium"
+              className={({ isActive }) =>
+                `h-14 px-5 rounded-2xl flex items-center gap-4 text-gray-700 hover:bg-blue-600 hover:text-white duration-200 font-medium ${isActive ? "bg-blue-600 text-white" : "bg-white"}`
+              }
             >
               <FaPlus />
               Maşın əlavə et
@@ -28,7 +30,9 @@ export const Sidebar = () => {
           <li>
             <NavLink
               to={ADMIN_ROUTES.ALLCARS}
-              className="h-14 px-5 rounded-2xl flex items-center gap-4 text-gray-700 hover:bg-blue-600 hover:text-white duration-200 font-medium"
+              className={({ isActive }) =>
+                `h-14 px-5 rounded-2xl flex items-center gap-4 text-gray-700 hover:bg-blue-600 hover:text-white duration-200 font-medium ${isActive ? "bg-blue-600 text-white" : "bg-white"}`
+              }
             >
               <FaCar />
               Bütün maşınlar
@@ -37,7 +41,7 @@ export const Sidebar = () => {
 
           <li>
             <div className=" px-5 rounded-2xl text-red-500 hover:bg-red-500 hover:text-white duration-200 font-medium">
-              <Logout adminToken={"admin"}/>
+              <Logout adminToken={"admin"} />
             </div>
           </li>
         </ul>

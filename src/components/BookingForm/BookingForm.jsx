@@ -9,7 +9,7 @@ export const BookingForm = () => {
       const [price, setPrice] = React.useState(0);
     
       React.useEffect(() => {
-        const carNames = Cars.map((car) => car.name);
+        const carNames = Cars?.map((car) => car.name);
         setName(carNames);
       }, []);
     

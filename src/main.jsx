@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
-import { MessageProvider } from "./components/Mesage/MessageProvider.jsx";
+import { MessageProvider } from "./components/ContextApi/MessageProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <MessageProvider>

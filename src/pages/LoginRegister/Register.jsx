@@ -12,10 +12,10 @@ export const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
 
-    if(token){
-      navigate(ROUTES.PROFILE)
+    if (token) {
+      navigate(ROUTES.PROFILE);
     }
   }, []);
 
@@ -23,7 +23,7 @@ export const Register = () => {
     e.preventDefault();
 
     const newUser = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       name: names,
       email: email,
       password: password,
@@ -70,6 +70,7 @@ export const Register = () => {
                 className="w-full h-full outline-none px-3 text-sm bg-white"
                 value={names}
                 onChange={(e) => setNames(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -92,6 +93,7 @@ export const Register = () => {
                 className="w-full h-full outline-none px-3 text-sm bg-white"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -114,6 +116,7 @@ export const Register = () => {
                 className="w-full h-full outline-none px-3 text-sm bg-white"
                 value={password}
                 onChange={(e) => setPasssword(e.target.value)}
+                required
               />
             </div>
           </div>

@@ -8,13 +8,14 @@ import {
   FaShoppingCart,
   FaUserFriends,
 } from "react-icons/fa";
-import { MessageContent } from "../../components/Mesage/MessageProvider";
+import { MessageContent } from "../../components/ContextApi/MessageProvider";
 import { CarsFilter } from "../../components/CarsFilter/CarsFilter";
 import { BookingForm } from "../../components/BookingForm/BookingForm";
 import { IoCarSportOutline, IoSearchSharp } from "react-icons/io5";
 import { useNavigate } from "react-router";
 
 export const Home = () => {
+  
   return (
     <div>
       <section className="pt-19">
@@ -36,9 +37,10 @@ export const Home = () => {
       </section>
 
       <section>
+
         <CarsFilter />
 
-        <section className="py-16">
+        <div className="py-16">
           <div className="mx-auto">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-10">
               Necə işləyir?
@@ -134,7 +136,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </section>
     </div>
   );
