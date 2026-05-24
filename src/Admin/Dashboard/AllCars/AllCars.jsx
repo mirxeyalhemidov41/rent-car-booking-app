@@ -7,7 +7,8 @@ import {
   FaUserFriends,
 } from "react-icons/fa";
 import { useNavigate } from "react-router";
-import { ROUTES } from "../../utils/const";
+import { ROUTES } from "../../../utils/const";
+import ButtonEdit from "../../components/ButtonEdit/ButtonEdit";
 
 export const AllCars = () => {
   const [cars, setCars] = useState([]);
@@ -22,17 +23,13 @@ export const AllCars = () => {
     navigate(ROUTES.STATISTICS);
   };
 
-const handleDelete = (id) => {
+  const handleDelete = (id) => {
+    const updated = cars.filter((car) => car.id !== id);
 
-  const updated = cars.filter((car) => car.id !== id);
+    setCars(updated);
 
-  setCars(updated);
-
-  localStorage.setItem(
-    "adminCar",
-    JSON.stringify(updated)
-  );
-};
+    localStorage.setItem("adminCar", JSON.stringify(updated));
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-10 mt-15 lg:mt-0">
@@ -109,11 +106,7 @@ const handleDelete = (id) => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row xl:flex-col gap-4 xl:w-[180px]">
-                  <button className="w-full h-13 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-medium flex items-center justify-center gap-3">
-                    <FaEdit />
-                    Redaktə et
-                  </button>
-
+                 <ButtonEdit car={car} cars={cars} setCars={setCars} />
                   <button
                     onClick={() => handleDelete(car.id)}
                     className="w-full h-13 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium flex items-center justify-center gap-3"

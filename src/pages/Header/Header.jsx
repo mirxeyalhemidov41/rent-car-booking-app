@@ -13,7 +13,7 @@ export const Header = () => {
 
   return (
     <div className="w-full bg-white static lg:fixed md:fixed top-0 left-0 z-50 shadow-lg">
-      <div className="max-w-[1440px] mx-auto px-4 flex  justify-between items-center py-2">
+      <div className="max-w-[1440px] mx-auto px-4 flex justify-between items-center py-2">
         <img className="w-30" src={logo} alt="logo" />
         <nav className=" hidden lg:flex md:flex items-center gap-x-10">
           <NavLink

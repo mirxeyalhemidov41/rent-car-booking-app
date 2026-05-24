@@ -22,7 +22,7 @@ export const AddCar = () => {
     e.preventDefault();
 
     const newCar = {
-      id:crypto.randomUUID(),
+      id: crypto.randomUUID(),
       name: name,
       price: price,
       fuel: fuel,
@@ -45,7 +45,7 @@ export const AddCar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-10">
+    <div className="min-h-screen mt-20 lg:mt-0 bg-gray-100 p-4 sm:p-6 lg:p-10">
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 sm:p-8 lg:p-10">
           <div className="mb-10">
@@ -76,10 +76,11 @@ export const AddCar = () => {
                 <input
                   id="name"
                   type="text"
-                  placeholder="Audi RS7"
+                  placeholder="Maşının adını daxil edin"
                   className="w-full outline-none bg-transparent"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -96,10 +97,11 @@ export const AddCar = () => {
                   min={0}
                   id="price"
                   type="number"
-                  placeholder="120"
+                  placeholder="Günlük qiyməti yazın"
                   className="w-full outline-none bg-transparent"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -117,6 +119,7 @@ export const AddCar = () => {
                   className="w-full outline-none bg-transparent text-gray-700"
                   value={fuel}
                   onChange={(e) => setFuel(e.target.value)}
+                  required
                 >
                   <option value="" disabled>
                     Yanacaq növü seçin
@@ -144,6 +147,7 @@ export const AddCar = () => {
                   className="w-full outline-none bg-transparent text-gray-700"
                   value={transmission}
                   onChange={(e) => setTransmission(e.target.value)}
+                  required
                 >
                   <option value="" disabled>
                     Sürətlər qutusu seçin
@@ -166,35 +170,48 @@ export const AddCar = () => {
                   min={0}
                   id="seats"
                   type="number"
-                  placeholder="5"
+                  placeholder="Maşının neçə nəfərlik olduğunu yazın"
                   className="w-full outline-none bg-transparent"
                   value={seats}
                   onChange={(e) => setSeats(e.target.value)}
+                  required
                 />
               </div>
             </div>
 
-            <div className="lg:col-span-2">
+            <div className="xl:col-span-2">
               <label className="text-gray-700 font-medium mb-2 block">
                 Maşın şəkli
               </label>
 
-              <label className="border-2 border-dashed border-gray-300 rounded-3xl p-6 sm:p-10 bg-gray-50 flex flex-col items-center justify-center text-center hover:border-blue-500 duration-200 cursor-pointer">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl sm:text-3xl">
+              <label className="  border-2 border-dashed border-gray-300  rounded-[28px]  p-4 sm:p-6 lg:p-7  bg-gray-50  flex flex-col  md:flex-col  xl:flex-row  items-center  gap-5 lg:gap-6  hover:border-blue-500  duration-200  cursor-p ">
+                <div className=" w-[80px] h-[80px] sm:w-[90px] sm:h-[90px] rounded-3xl bg-blue-100 text-blue-600 flex items-center justify-center text-3xl sm:text-4xl shrink-0">
                   <FaImage />
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mt-5">
-                  Şəkil seç
-                </h2>
+                <div className="flex-1 text-center xl:text-left w-full">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+                    Yeni şəkil seç
+                  </h2>
 
-                <p className="text-sm sm:text-base text-gray-500 mt-2">
-                  PNG, JPG və ya WEBP formatı
-                </p>
+                  <p className="text-gray-500 mt-2 text-sm sm:text-base">
+                    PNG, JPG və ya WEBP formatı
+                  </p>
 
-                <div className="mt-6 px-6 h-12 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-medium flex items-center justify-center">
-                  Fayl seç
+                  <div className=" mt-5 w-full sm:w-fit inline-flex px-6 h-12 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-medium items-center justify-center">
+                    Fayl seç
+                  </div>
                 </div>
+
+                {image && (
+                  <div className=" w-full md:w-[300px] xl:w-[220px] h-[180px] sm:h-[220px] xl:h-[140px] rounded-2xl overflow-hidden bg-white border border-gray-200 flex items-center justify-center shrink-0 ">
+                    <img
+                      src={image}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
 
                 <input
                   type="file"
@@ -214,15 +231,6 @@ export const AddCar = () => {
                   }}
                 />
               </label>
-
-              {image && (
-                <div className="mt-6 flex justify-center">
-                  <img
-                    src={image}
-                    className="w-full max-w-[300px] h-[200px] object-cover rounded-2xl border border-gray-200"
-                  />
-                </div>
-              )}
             </div>
 
             <div className="lg:col-span-2 flex justify-end">

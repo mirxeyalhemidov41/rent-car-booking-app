@@ -32,8 +32,6 @@ export const Home = () => {
             <span className="block">kirayə imkanı</span>
           </p>
         </div>
-
-        <BookingForm />
       </section>
 
       <section>

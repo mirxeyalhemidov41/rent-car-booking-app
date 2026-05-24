@@ -7,6 +7,7 @@ import {
   FaShoppingCart,
   FaUserFriends,
 } from "react-icons/fa";
+import { BookingForm } from "../BookingForm/BookingForm";
 
 export const CarsFilter = () => {
   const { basket, setBasket } = useContext(MessageContent);
@@ -39,6 +40,7 @@ export const CarsFilter = () => {
   };
   return (
     <div>
+      <BookingForm />
       <div className="mt-15">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-10">
           Populyar maşınlar

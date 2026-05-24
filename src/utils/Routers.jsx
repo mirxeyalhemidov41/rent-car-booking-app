@@ -9,8 +9,8 @@ import { Basget } from "../pages/Basket/Basget";
 import { Profile } from "../pages/LoginRegister/Profile";
 import { NotFound } from "../pages/NotFound/NotFound";
 import Admin from "../Admin/Admin";
-import { AddCar } from "../Admin/Dashboard/AddCar";
-import { AllCars } from "../Admin/Dashboard/AllCars";
+import { AddCar } from "../Admin/Dashboard/AddCar/AddCar";
+import { AllCars } from "../Admin/Dashboard/AllCars/AllCars";
 import { Logout } from "../components/Logout/Logout";
 import { Register } from "../pages/LoginRegister/Register";
 

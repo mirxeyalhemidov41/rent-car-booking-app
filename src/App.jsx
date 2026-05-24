@@ -24,7 +24,7 @@ function App() {
         <Routers />
       ) : (
         <div className="max-w-[1440px] mx-auto px-4">
-          <Routers />
+          <Routers/>
         </div>
       )}
 
