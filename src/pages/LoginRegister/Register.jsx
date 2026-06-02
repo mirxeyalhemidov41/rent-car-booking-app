@@ -45,9 +45,7 @@ export const Register = () => {
 
     localStorage.setItem("User", JSON.stringify(updatedUsers));
 
-    if (user) {
-      toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
-    }
+    toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
 
     setNames("");
     setEmail("");

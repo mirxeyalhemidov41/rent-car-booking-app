@@ -63,6 +63,17 @@ npm run dev
 http://localhost:5173
 ```
 
+## Deploy
+
+Bu layihəni GitHub Pages üzərindən yerləşdirmək üçün aşağıdakı komandaları işə salın:
+
+```bash
+npm run build
+npm run deploy
+```
+
+`package.json` faylında `homepage` sahəsi artıq `https://mirxeyalhemidov41.github.io/rent-car-booking-app` olaraq təyin olunub.
+
 ## İstifadə Qaydaları
 
 ### İstifadəçi kimi
