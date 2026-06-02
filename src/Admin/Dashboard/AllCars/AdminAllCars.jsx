@@ -5,12 +5,14 @@ import {
   FaGasPump,
   FaCogs,
   FaUserFriends,
+  FaCalendarAlt,
+  FaCarSide,
 } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../utils/const";
 import ButtonEdit from "../../components/ButtonEdit/ButtonEdit";
 
-export const AllCars = () => {
+export const AdminAllCars = () => {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
 
@@ -101,12 +103,22 @@ export const AllCars = () => {
                         <FaUserFriends />
                         {car.seats} nəfər
                       </div>
+
+                      <div className="px-4 h-11 rounded-xl bg-gray-100 flex items-center gap-2 text-gray-700 text-sm">
+                        <FaCalendarAlt />
+                        {car.year}
+                      </div>
+
+                      <div className="px-4 h-11 rounded-xl bg-gray-100 flex items-center gap-2 text-gray-700 text-sm">
+                        <FaCarSide />
+                        {car.engine}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row xl:flex-col gap-4 xl:w-[180px]">
-                 <ButtonEdit car={car} cars={cars} setCars={setCars} />
+                  <ButtonEdit car={car} cars={cars} setCars={setCars} />
                   <button
                     onClick={() => handleDelete(car.id)}
                     className="w-full h-13 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium flex items-center justify-center gap-3"

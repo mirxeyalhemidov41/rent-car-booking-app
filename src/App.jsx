@@ -3,11 +3,19 @@ import { Header } from "./pages/Header/Header";
 import { Routers } from "./utils/Routers";
 import { Footer } from "./pages/Footer/Footer";
 import { useLocation } from "react-router-dom";
-import { Login } from "./pages/LoginRegister/Login";
-import { Register } from "./pages/LoginRegister/Register";
-import Admin from "./Admin/Admin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import Aos from "aos";
 function App() {
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
   const location = useLocation();
 
   const hideLayout =
@@ -16,19 +24,20 @@ function App() {
     location.pathname.startsWith("/admin");
 
   return (
-        <div>
-      
+    <div className="overflow-x-hidden">
       {!hideLayout && <Header />}
 
-       {hideLayout ? (
+      {hideLayout ? (
         <Routers />
       ) : (
         <div className="max-w-[1440px] mx-auto px-4">
-          <Routers/>
+          <Routers />
         </div>
       )}
 
       {!hideLayout && <Footer />}
+
+      <ToastContainer position="bottom-right" autoClose={3000} theme="light" />
     </div>
   );
 }

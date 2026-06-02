@@ -20,7 +20,7 @@ export default function Admin() {
     <div className="flex min-h-screen w-full bg-gray-100">
       <Sidebar />
 
-      <div className="flex-1 p-5 lg:p-10">
+      <div className="flex-1 py-5 lg:p-10">
         <Outlet />
       </div>
     </div>

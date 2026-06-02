@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
 import { FaSignOutAlt } from "react-icons/fa";
+import { MessageContent } from "../ContextApi/MessageProvider";
 
 export const Logout = ({ adminToken }) => {
+  const { basket, setBasket } = useContext(MessageContent);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleLogout = () => {
     localStorage.removeItem(adminToken);
-    const token = localStorage.getItem("token")
-    if(!token){
+    const token = localStorage.getItem("token");
+    if (!token) {
       navigate(ROUTES.HOME);
     }
+
+    setBasket([]);
   };
 
   return (
     <div>
-      <button className="flex w-full items-center h-14 gap-4" onClick={handleClick}>
-      <FaSignOutAlt />
-      Çıxış et
-    </button>
+      <button className="w-full lg:-ml-14 h-14" onClick={handleLogout}>
+        <FaSignOutAlt className="inline mr-3" />
+        Çıxış et
+      </button>
     </div>
   );
 };

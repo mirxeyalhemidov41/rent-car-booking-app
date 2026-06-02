@@ -1,111 +1,101 @@
-import React from 'react'
-import Cars from '../../data/CarsArr';
+import React, { useState } from "react";
+import Cars from "../../data/CarsArr";
 
-export const BookingForm = () => {
-      const [names, setName] = React.useState([]);
-      const [selectedCar, setSelectedCar] = React.useState("");
-      const [duedate, setDueDate] = React.useState("");
-      const [returndate, setReturnDate] = React.useState("");
-      const [price, setPrice] = React.useState(0);
-    
-      React.useEffect(() => {
-        const carNames = Cars?.map((car) => car.name);
-        setName(carNames);
-      }, []);
-    
-      const HandleForm = (e) => {
-        e.preventDefault();
-        if (!selectedCar || !duedate || !returndate) {
-          alert("Zəhmət olmasa bütün xanaları doldurun!");
-          return;
-        }
-        const start = new Date(duedate);
-        const end = new Date(returndate);
-        const diffDays = (end - start) / (1000 * 60 * 60 * 24);
-        if (diffDays <= 0) {
-          alert("Qaytarılacaq tarix götürüləcək tarixdən sonra olmalıdır!");
-          return;
-        }
-        const car = Cars.find((item) => item.name === selectedCar);
-        if (car) {
-          setPrice(car.price * diffDays);
-        }
-      };
+export const BookingForm = ({
+  name,
+  setName,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+  handleSearch,
+  showAllCars,
+}) => {
   return (
     <div>
-        <form
-  onSubmit={HandleForm}
-  className="flex flex-col md:flex-row gap-6 md:gap-10 p-5 md:p-8 lg:p-10 rounded-2xl shadow-xl justify-between md:items-end flex-wrap"
->
-  <div className="flex flex-col w-full md:w-[220px]">
-    <label className="text-gray-800 font-medium" htmlFor="masin">
-      Maşını seç:
-    </label>
+      <div data-aos="fade-up" className="mt-12 lg:mt-16">
+        <div className="w-full rounded-[36px] bg-white/95 backdrop-blur-2xl bg-white border border-gray-200 shadow-sm p-5 sm:p-6 lg:p-7">
+          <form
+            onSubmit={handleSearch}
+            className="my-3 py-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-10"
+          >
+            <div className="flex flex-col gap-2">
+              <label className="text-lg text-gray-500 font-medium">
+                Maşın adı:
+              </label>
+              <div className="h-16 rounded-2xl border border-gray-200 bg-white px-5 flex items-center shadow-sm">
+                <input
+                  type="text"
+                  placeholder="Maşın adı yazın"
+                  className="w-full outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
+                  value={name}
+                  onChange={(e) =>
+                    setName(e.target.value.trim().toLocaleLowerCase())
+                  }
+                />
+              </div>
+            </div>
 
-    <select
-      id="masin"
-      name=""
-      value={selectedCar}
-      onChange={(e) => setSelectedCar(e.target.value)}
-      className="outline-none border text-gray-400 border-gray-300 rounded-sm w-full px-2 py-2 my-2"
-    >
-      <option value="">Maşın Seçin</option>
+            <div className="flex flex-col gap-2">
+              <label className="text-lg text-gray-500 font-medium">
+                Minimum qiymət:
+              </label>
+              <div className="h-16 rounded-2xl border border-gray-200 bg-white px-5 flex items-center shadow-sm">
+                <input
+                  min={0}
+                  type="number"
+                  placeholder="Minimum qiymət"
+                  className="w-full outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                />
+              </div>
+            </div>
 
-      {names?.map((name) => (
-        <option key={name} value={name}>
-          {name}
-        </option>
-      ))}
-    </select>
-  </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-lg text-gray-500 font-medium">
+                Maksimum qiymət:
+              </label>
+              <div className="h-16 rounded-2xl border border-gray-200 bg-white px-5 flex items-center shadow-sm">
+                <input
+                  min={0}
+                  type="number"
+                  placeholder="Maksimum qiymət"
+                  className="w-full outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+              </div>
+            </div>
 
-  <div className="flex flex-col w-full md:w-[220px]">
-    <label className="text-gray-800 font-medium" htmlFor="start">
-      Götüreləcək tarix:
-    </label>
+            <div className="flex items-end gap-3">
+              {!name || !maxPrice || !minPrice ? (
+                <button
+                  disabled
+                  className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-semibold text-lg shadow-lg disabled:cursor-not-allowed shadow-blue-600/30"
+                >
+                  Axtar
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-semibold text-lg cursor-pointer shadow-lg shadow-blue-600/30"
+                >
+                  Axtar
+                </button>
+              )}
 
-    <input
-      type="date"
-      name=""
-      id="start"
-      value={duedate}
-      onChange={(e) => setDueDate(e.target.value)}
-      className="outline-none border text-gray-400 border-gray-300 rounded-sm w-full px-2 py-2 my-2"
-    />
-  </div>
-
-  <div className="flex flex-col w-full md:w-[220px]">
-    <label className="text-gray-800 font-medium" htmlFor="end">
-      Geri qaytarılacaq tarix:
-    </label>
-
-    <input
-      type="date"
-      name=""
-      id="end"
-      value={returndate}
-      onChange={(e) => setReturnDate(e.target.value)}
-      className="outline-none border text-gray-400 border-gray-300 rounded-sm w-full px-2 py-2 my-2"
-    />
-  </div>
-
-  <button
-    type="submit"
-    className="w-full md:w-auto text-white bg-blue-600 px-6 h-12 rounded-lg"
-  >
-    Qiymətə bax
-  </button>
-
-  <div className="flex flex-col w-full md:w-auto">
-    <label className="text-gray-800 font-medium">
-      Qiymət:
-    </label>
-
-    <span className="w-full md:min-w-20 text-center border text-gray-400 border-gray-300 rounded-sm px-2 py-2 my-2">
-      {price > 0 ? `${price} AZN` : "-"}
-    </span>
-  </div>
-</form>
+              <button
+                type="button"
+                onClick={showAllCars}
+                className="h-16 flex-1 rounded-2xl border border-gray-200 bg-white text-gray-700 font-semibold text-lg hover:bg-gray-50 duration-200 shadow-sm cursor-pointer"
+              >
+                Bütün maşınlar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};

@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+  FaCalendarAlt,
+  FaCarSide,
   FaCogs,
   FaGasPump,
   FaShoppingCart,
@@ -7,14 +9,33 @@ import {
   FaUserFriends,
   FaWhatsapp,
 } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import { MessageContent } from "../../components/ContextApi/MessageProvider";
-import { data, NavLink } from "react-router";
+import { data, NavLink, useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
+import { toast } from "react-toastify";
 
 export const Basget = () => {
   const { basket, setBasket } = useContext(MessageContent);
   const [day, setDay] = React.useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate(ROUTES.LOGIN);
+  }
+
   const DueDate = (e, id) => {
     const updated = basket.map((item) => {
       if (item.id === id) {
@@ -40,7 +61,7 @@ export const Basget = () => {
         const diffDays = (end - start) / (1000 * 60 * 60 * 24);
 
         if (diffDays <= 0) {
-          alert("Qaytarılacaq tarix götürüləcək tarixdən sonra olmalıdır!");
+          toast.error("Qaytarılacaq tarix götürüləcək tarixdən sonra olmalıdır!");
           item.returnDate = "";
           return item;
         }
@@ -100,8 +121,8 @@ Maşın adı: ${selectedCars?.map((item) => {
 
   return (
     <div>
-      <div className="py-10 mt-0 md:mt-20 lg:mt-20 min-h-screen">
-        <div className="max-w-[1440px] mx-auto px-4">
+      <div className="py-10 mt-20 lg:mt-20 min-h-screen">
+        <div className="max-w-[1440px] mx-auto">
           <div className="mb-8">
             <p className="text-gray-400 text-sm mb-2">Ana Səhifə / Səbət</p>
 
@@ -114,98 +135,123 @@ Maşın adı: ${selectedCars?.map((item) => {
 
           <div className="flex flex-col xl:flex-row gap-8">
             <div className="flex-1 flex flex-col gap-6">
-              {basket?.map((car) => (
-                <div
-                  key={car.id}
-                  className="bg-white border border-gray-200 rounded-3xl p-6 flex flex-col lg:flex-row gap-6 shadow-sm"
-                >
-                  <div className="flex justify-center items-center">
-                    <img
-                      src={car.image}
-                      alt=""
-                      className="w-[250px] object-contain"
-                    />
-                  </div>
+              {basket.length > 0 && loading ? (
+                <div className="col-span-full flex justify-center items-center py-20">
+                  <h2 className="text-2xl font-semibold text-gray-600">
+                    Maşınlar yüklənir...
+                  </h2>
+                </div>
+              ) : (
+                basket?.map((car, index) => (
+                  <div
+                    data-aos="fade-up"
+                    data-aos-delay={index * 80}
+                    key={car.id}
+                    className="relative bg-white border border-gray-200 rounded-3xl p-6 flex flex-col lg:flex-row gap-6 shadow-sm"
+                  >
+                    <div className="flex justify-center items-center">
+                      <img
+                        src={car.image}
+                        alt=""
+                        className="w-[200px] object-contain"
+                      />
+                    </div>
 
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div className="flex items-start justify-between flex-wrap gap-4">
-                      <div>
-                        <h2 className="text-2xl font-bold text-gray-900">
-                          {car.name}
-                        </h2>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div className="flex relative flex-col gap-4 pr-10">
+                        <div>
+                          <h2 className="text-2xl font-bold text-gray-900">
+                            {car.name}
+                          </h2>
 
-                        <div className="flex items-center gap-5 mt-3 text-gray-500 text-sm flex-wrap">
-                          <span className="flex items-center gap-2">
-                            <FaCogs className="text-gray-600" />{" "}
-                            {car.transmission}
-                          </span>
+                          <div className="flex items-center gap-5 mt-3 text-gray-500 text-sm flex-wrap">
+                            <span className="flex items-center gap-2">
+                              <FaCogs className="text-gray-600" />{" "}
+                              {car.transmission}
+                            </span>
 
-                          <span className="flex items-center gap-2">
-                            <FaGasPump className="text-gray-600" /> {car.fuel}
-                          </span>
+                            <span className="flex items-center gap-2">
+                              <FaGasPump className="text-gray-600" /> {car.fuel}
+                            </span>
 
-                          <span className="flex items-center gap-2">
-                            <FaUserFriends className="text-gray-600" />{" "}
-                            {car.seats}
-                          </span>
+                            <span className="flex items-center gap-2">
+                              <FaUserFriends className="text-gray-600" />{" "}
+                              {car.seats}
+                            </span>
+
+                            <span className="flex items-center gap-2 px-3 py-2 rounded-xl text-gray-700 text-sm">
+                              <FaCalendarAlt className="text-gray-600" />
+                              {car.year}
+                            </span>
+
+                            <span className="flex items-center gap-2 px-3 py-2 rounded-xl text-gray-700 text-sm">
+                              <FaCarSide className="text-gray-600" />
+                              {car.engine}
+                            </span>
+                          </div>
                         </div>
                       </div>
 
+                      <div className="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-6 mt-8">
+                        <div className="flex flex-col sm:flex-row gap-4">
+                          <div className="border border-gray-200 rounded-xl p-3 min-w-[180px]">
+                            <p className="text-sm text-gray-400">
+                              Götürüləcək tarix
+                            </p>
+
+                            <input
+                              type="date"
+                              min={today}
+                              value={car.dueDate}
+                              onChange={(e) => DueDate(e, car.id)}
+                            />
+                          </div>
+
+                          <div className="border border-gray-200 rounded-xl p-3 min-w-[180px]">
+                            <p className="text-sm text-gray-400">
+                              Qaytarılacaq tarix
+                            </p>
+
+                            <input
+                              type="date"
+                              min={car.dueDate || today}
+                              className="font-medium text-gray-800 block mt-1"
+                              value={car.returnDate}
+                              onChange={(e) => ReturnDate(e, car.id)}
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <span className="text-gray-400 text-sm">
+                            {car.price} AZN / gün
+                          </span>
+
+                          <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                            {car.totalPrice} AZN
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
                       <button
-                        className="text-3xl text-gray-400 hover:text-blue-500 duration-200 cursor-pointer"
+                        className="absolute top-2 right-2 w-10 h-10 rounded-full hover:text-blue-600 duration-200 flex items-center justify-center text-2xl text-gray-500 cursor-pointer"
                         onClick={() => HandleDelete(car.id)}
                       >
                         ×
                       </button>
                     </div>
-
-                    <div className="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-6 mt-8">
-                      <div className="flex flex-col sm:flex-row gap-4">
-                        <div className="border border-gray-200 rounded-xl p-3 min-w-[180px]">
-                          <p className="text-sm text-gray-400">
-                            Götürüləcək tarix
-                          </p>
-
-                          <input
-                            type="date"
-                            className="font-medium text-gray-800 block mt-1"
-                            value={car.dueDate}
-                            onChange={(e) => DueDate(e, car.id)}
-                          />
-                        </div>
-
-                        <div className="border border-gray-200 rounded-xl p-3 min-w-[180px]">
-                          <p className="text-sm text-gray-400">
-                            Qaytarılacaq tarix
-                          </p>
-
-                          <input
-                            type="date"
-                            className="font-medium text-gray-800 block mt-1"
-                            value={car.returnDate}
-                            onChange={(e) => ReturnDate(e, car.id)}
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <span className="text-gray-400 text-sm">
-                          {car.price} AZN / gün
-                        </span>
-
-                        <h2 className="text-2xl font-bold text-gray-900 mt-1">
-                          {car.totalPrice} AZN
-                        </h2>
-                      </div>
-                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
 
             {basket.length > 0 ? (
               <div className="w-full xl:w-[400px]">
-                <div className="bg-white rounded-3xl border border-gray-200 p-8 sticky top-5 shadow-sm">
+                <div
+                  data-aos="fade-left"
+                  className="bg-white rounded-3xl border border-gray-200 p-8 sticky top-5 shadow-sm"
+                >
                   <h2 className="text-3xl font-bold text-gray-900 mb-8">
                     Sifariş xülasəsi
                   </h2>
@@ -256,26 +302,20 @@ Maşın adı: ${selectedCars?.map((item) => {
                     </button>
                   )}
 
-                  {basket.length > 0 ? (
-                    <button
-                      onClick={handleClearBasket}
-                      className="w-full h-14 rounded-2xl border border-gray-300 hover:bg-gray-100 duration-200 text-gray-700 font-medium text-lg mt-4 cursor-pointer"
-                    >
-                      Səbəti təmizlə
-                    </button>
-                  ) : (
-                    <button
-                      disabled
-                      className="w-full h-14 rounded-2xl border border-gray-300 hover:bg-gray-100 duration-200 text-gray-700 font-medium text-lg mt-4 cursor-not-allowed"
-                    >
-                      Səbəti təmizlə
-                    </button>
-                  )}
+                  <button
+                    onClick={handleClearBasket}
+                    className="w-full h-14 rounded-2xl border border-gray-300 hover:bg-gray-100 duration-200 text-gray-700 font-medium text-lg mt-4 cursor-pointer"
+                  >
+                    Səbəti təmizlə
+                  </button>
                 </div>
               </div>
             ) : (
               <div className="w-full flex items-center justify-center py-20 px-4">
-                <div className="w-full max-w-md bg-white border border-gray-200 rounded-3xl shadow-sm p-10 text-center">
+                <div
+                  data-aos="zoom-in"
+                  className="w-full max-w-md bg-white border border-gray-200 rounded-3xl shadow-sm p-10 text-center"
+                >
                   <div className="w-24 h-24 mx-auto rounded-full bg-blue-50 flex items-center justify-center">
                     <FaShoppingCart className="text-4xl text-blue-600" />
                   </div>
@@ -290,7 +330,7 @@ Maşın adı: ${selectedCars?.map((item) => {
                   </p>
 
                   <NavLink
-                    to={ROUTES.HOME}
+                    to={ROUTES.CARS}
                     className="w-full h-14 mt-8 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-medium text-lg flex items-center justify-center"
                   >
                     Maşınlara bax

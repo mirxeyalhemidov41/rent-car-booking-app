@@ -3,13 +3,9 @@ import React, { createContext, useState, useEffect } from "react";
 export const MessageContent = createContext();
 
 export const MessageProvider = ({ children }) => {
-  const [basket, setBasket] = useState([]);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("selectedCars")) || [];
-
-    setBasket(data);
-  }, []);
+  const [basket, setBasket] = useState(
+    JSON.parse(localStorage.getItem("selectedCars")) || [],
+  );
 
   return (
     <MessageContent.Provider value={{ basket, setBasket }}>

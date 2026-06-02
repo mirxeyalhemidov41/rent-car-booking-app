@@ -13,7 +13,10 @@ export const AddCar = () => {
   const [fuel, setFuel] = useState("");
   const [transmission, setTransmission] = useState("");
   const [seats, setSeats] = useState("");
+  const [year, setYear] = useState("");
+  const [engine, setEngine] = useState("");
   const [image, setImage] = useState("");
+  const [isPopular, setIsPopular] = useState(false);
   const [authCar, setAuthCar] = useState(
     JSON.parse(localStorage.getItem("adminCar")) || [],
   );
@@ -28,7 +31,10 @@ export const AddCar = () => {
       fuel: fuel,
       transmission: transmission,
       seats: seats,
+      year: year,
+      engine: engine,
       image: image,
+      isPopular,
     };
 
     const updatedCar = [...authCar, newCar];
@@ -42,6 +48,8 @@ export const AddCar = () => {
     setTransmission("");
     setSeats("");
     setImage("");
+    setYear("");
+    setEngine("");
   };
 
   return (
@@ -176,6 +184,72 @@ export const AddCar = () => {
                   onChange={(e) => setSeats(e.target.value)}
                   required
                 />
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-gray-700 font-medium mb-2" htmlFor="year">
+                İstehsal ili
+              </label>
+
+              <div className="h-14 border border-gray-200 rounded-2xl px-4 flex items-center gap-3 focus-within:border-blue-500 duration-200">
+                <FaCar className="text-gray-400" />
+
+                <input
+                  step="0.1"
+                  min={0}
+                  id="year"
+                  type="number"
+                  placeholder="İstehsal ilin yazın"
+                  className="w-full outline-none bg-transparent"
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <label
+                className="text-gray-700 font-medium mb-2"
+                htmlFor="engine"
+              >
+                Mühərrik
+              </label>
+
+              <div className="h-14 border border-gray-200 rounded-2xl px-4 flex items-center gap-3 focus-within:border-blue-500 duration-200">
+                <FaCar className="text-gray-400" />
+
+                <input
+                  step="0.1"
+                  min={0}
+                  id="engine"
+                  type="number"
+                  placeholder="Mühərriki yazın"
+                  className="w-full outline-none bg-transparent"
+                  value={engine}
+                  onChange={(e) => setEngine(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-gray-700 font-medium mb-2">
+                Populyar maşın
+              </label>
+
+              <div className="h-14 border border-gray-200 rounded-2xl px-4 flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={isPopular}
+                  onChange={(e) => setIsPopular(e.target.checked)}
+                  className="w-5 h-5 cursor-pointer"
+                />
+
+                <span className="text-gray-700">
+                  Bu maşın populyar maşınlar bölməsində göstərilsin
+                </span>
               </div>
             </div>
 

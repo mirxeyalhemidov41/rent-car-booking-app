@@ -19,9 +19,20 @@ export const Profile = () => {
   const ProfilUsers = Users.find((item) => item.id == ProfileId);
 
   return (
-    <div className="min-h-screen  px-4 py-10 flex items-center justify-center">
-      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-[0_0_25px_rgba(0,0,0,0.1)] p-6 sm:p-8">
-        <div className="flex flex-col items-center text-center">
+    <div
+      className=" overflow-x: hidden"
+      data-aos="fade-up"
+      className="min-h-screen  px-4 py-10 flex items-center justify-center"
+    >
+      <div
+        data-aos="zoom-in"
+        data-aos-delay="100"
+        className="w-full mt-20 max-w-2xl bg-white rounded-3xl shadow-[0_0_25px_rgba(0,0,0,0.1)] p-6 sm:p-8"
+      >
+        <div
+          data-aos="fade-down"
+          className="flex flex-col items-center text-center"
+        >
           <div className="w-28 h-28 rounded-full bg-blue-600 text-white flex items-center justify-center text-4xl font-bold">
             {ProfilUsers.name.charAt(0)}
           </div>
@@ -34,7 +45,11 @@ export const Profile = () => {
         </div>
 
         <div className="mt-10 space-y-5">
-          <div className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4">
+          <div
+            data-aos="fade-right"
+            data-aos-delay="100"
+            className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4"
+          >
             <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
               <FaUser />
             </div>
@@ -48,7 +63,11 @@ export const Profile = () => {
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4">
+          <div
+            data-aos="fade-right"
+            data-aos-delay="200"
+            className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4"
+          >
             <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
               <FaEnvelope />
             </div>
@@ -62,7 +81,11 @@ export const Profile = () => {
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4">
+          <div
+            data-aos="fade-right"
+            data-aos-delay="300"
+            className="border border-gray-200 rounded-2xl p-5 flex items-center gap-4"
+          >
             <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
               <FaLock />
             </div>
@@ -76,12 +99,10 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="w-full mt-8 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium text-lg  flex items-center justify-center">
+        <div className="w-full mt-8 lg:pl-10 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium text-lg text-center">
           <Logout adminToken={"token"} />
         </div>
       </div>
     </div>
   );
 };
-
-

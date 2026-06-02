@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
+import { toast } from "react-toastify";
 
 export const Register = () => {
   const [names, setNames] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPasssword] = useState("");
-  const [authUser, setAuthUser] = useState([]);
+  const [authUser, setAuthUser] = useState(
+    JSON.parse(localStorage.getItem("User")) || [],
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
       navigate(ROUTES.PROFILE);
     }
@@ -21,6 +23,14 @@ export const Register = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
+
+    const UserFiilter = authUser.find((user) => user.email == email);
+    if (UserFiilter) {
+      toast.error("Qeydiyyat zamanı xəta baş verdi!");
+      return;
+    }
+
+    const user = localStorage.getItem("User");
 
     const newUser = {
       id: crypto.randomUUID(),
@@ -34,6 +44,10 @@ export const Register = () => {
     setAuthUser(updatedUsers);
 
     localStorage.setItem("User", JSON.stringify(updatedUsers));
+
+    if (user) {
+      toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
+    }
 
     setNames("");
     setEmail("");

@@ -2,6 +2,7 @@ export const ROUTES = {
   HOME: "/",
   CARS: "/maşınlar",
   ABOUTUS: "/haqqımızda",
+  CONTACT: "/əlaqə",
   BASKET: "/səbət",
   LOGIN: "/login",
   REGISTER: "/register",

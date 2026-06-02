@@ -3,6 +3,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { data, NavLink, useNavigate } from "react-router";
 import { ROUTES } from "../../utils/const";
 import { authUsers } from "../../data/authUsers/authUsers";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const [names, setNames] = useState("");
@@ -53,8 +54,9 @@ export const Login = () => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
       navigate(ROUTES.HOME);
+      toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
     } else if (!token) {
-      alert("Daxil etdiyiniz email və ya şifrə yanlışdır!");
+      toast.error("Qeydiyyat zamanı xəta baş verdi!");
     }
 
     setEmail("");
@@ -142,7 +144,3 @@ export const Login = () => {
     </div>
   );
 };
-
-
-
-
