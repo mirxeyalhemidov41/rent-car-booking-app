@@ -9,7 +9,7 @@ export const BookingForm = ({
   maxPrice,
   setMaxPrice,
   handleSearch,
-  showAllCars,
+  resetFilters,
 }) => {
   return (
     <div>
@@ -69,25 +69,16 @@ export const BookingForm = ({
             </div>
 
             <div className="flex items-end gap-3">
-              {!name || !maxPrice || !minPrice ? (
-                <button
-                  disabled
-                  className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-semibold text-lg shadow-lg disabled:cursor-not-allowed shadow-blue-600/30"
-                >
-                  Axtar
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-semibold text-lg cursor-pointer shadow-lg shadow-blue-600/30"
-                >
-                  Axtar
-                </button>
-              )}
+              <button
+                type="submit"
+                className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 duration-200 text-white font-semibold text-lg cursor-pointer shadow-lg shadow-blue-600/30"
+              >
+                Axtar
+              </button>
 
               <button
                 type="button"
-                onClick={showAllCars}
+                onClick={resetFilters}
                 className="h-16 flex-1 rounded-2xl border border-gray-200 bg-white text-gray-700 font-semibold text-lg hover:bg-gray-50 duration-200 shadow-sm cursor-pointer"
               >
                 Bütün maşınlar

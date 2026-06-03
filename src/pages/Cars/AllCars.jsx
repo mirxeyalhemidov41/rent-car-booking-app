@@ -34,7 +34,7 @@ export const AllCars = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!name || !minPrice || !maxPrice) {
+    if (!name && !minPrice && !maxPrice) {
       toast.error("Zəhmət olmasa bütün xanaları doldurun!");
       return;
     }

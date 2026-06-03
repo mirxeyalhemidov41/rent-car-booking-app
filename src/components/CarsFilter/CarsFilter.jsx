@@ -42,12 +42,12 @@ export const CarsFilter = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!name || !minPrice || !maxPrice) {
-      alert("Zəhmət olmasa bütün xanaları doldurun!");
+    if (Number(minPrice) > Number(maxPrice)) {
+      toast.error("Minimum qiymət maksimum qiymətdən böyük ola bilməz");
       return;
     }
-    if (Number(minPrice) > Number(maxPrice)) {
-      alert("Minimum qiymət maksimum qiymətdən böyük ola bilməz");
+    if (!name && !minPrice && !maxPrice) {
+      toast.error("Zəhmət olmasa bütün xanaları doldurun!");
       return;
     }
 
@@ -118,7 +118,7 @@ export const CarsFilter = () => {
           maxPrice={maxPrice}
           setMaxPrice={setMaxPrice}
           handleSearch={handleSearch}
-          showAllCars={showAllCars}
+          resetFilters={resetFilters}
         />
       )}
       <div
