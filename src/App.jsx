@@ -1,7 +1,7 @@
 import "./App.css";
-import { Header } from "./pages/Header/Header";
+import { Header } from "./components/Header/Header";
 import { Routers } from "./utils/Routers";
-import { Footer } from "./pages/Footer/Footer";
+import { Footer } from "./components/Footer/Footer";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

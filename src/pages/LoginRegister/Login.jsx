@@ -55,7 +55,10 @@ export const Login = () => {
     if (token) {
       navigate(ROUTES.HOME);
       toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
-    } else if (!token) {
+    } else if (admin) {
+      navigate(ROUTES.STATISTICS);
+        toast.success("Qeydiyyatdan uğurla keçdiniz 🎉");
+    } else if (!token || !admin) {
       toast.error("Qeydiyyat zamanı xəta baş verdi!");
     }
 

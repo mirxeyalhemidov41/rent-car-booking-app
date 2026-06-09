@@ -3,7 +3,7 @@ import logo from "../../../public/logo.png";
 import { NavLink } from "react-router";
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from "react-icons/fa";
 import { ROUTES } from "../../utils/const";
-import { MessageContent } from "../../components/ContextApi/MessageProvider";
+import { MessageContent } from "../ContextApi/MessageProvider";
 import { FaCircleUser } from "react-icons/fa6";
 
 export const Header = () => {

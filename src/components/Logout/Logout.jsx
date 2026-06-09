@@ -4,11 +4,13 @@ import { ROUTES } from "../../utils/const";
 import { FaSignOutAlt } from "react-icons/fa";
 import { MessageContent } from "../ContextApi/MessageProvider";
 
-export const Logout = ({ adminToken }) => {
+export const Logout = ({ userToken, selectedCars,adminToken }) => {
   const { basket, setBasket } = useContext(MessageContent);
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem(userToken);
+    localStorage.removeItem(selectedCars);
     localStorage.removeItem(adminToken);
     const token = localStorage.getItem("token");
     if (!token) {

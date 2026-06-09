@@ -9,7 +9,7 @@ export const ROUTES = {
   PROFILE: "/profile",
   ADMIN: "/admin",
   STATISTICS: "/admin/MasinElaveEt",
-  NOTFOUND: "/*",
+  NOTFOUND: "*",
 };
 
 export const ADMIN_ROUTES = {

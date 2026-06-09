@@ -100,7 +100,7 @@ export const Profile = () => {
           </div>
         </div>
         <div className="w-full mt-8 lg:pl-10 rounded-2xl bg-red-500 hover:bg-red-600 duration-200 text-white font-medium text-lg text-center">
-          <Logout adminToken={"token"} />
+          <Logout userToken={"token"} selectedCars={"selectedCars"} />
         </div>
       </div>
     </div>

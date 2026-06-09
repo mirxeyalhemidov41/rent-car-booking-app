@@ -85,13 +85,6 @@ export const AllCars = () => {
 
     setBasket(updated);
   };
-  const showAllCars = () => {
-    setFilteredCars(Cars);
-    setName("");
-    setMinPrice("");
-    setMaxPrice("");
-  };
-
   return (
     <div className="py-10 mt-20 min-h-screen">
       <div className="max-w-[1440px] mx-auto">
@@ -118,7 +111,6 @@ export const AllCars = () => {
             maxPrice={maxPrice}
             setMaxPrice={setMaxPrice}
             handleSearch={handleSearch}
-            showAllCars={showAllCars}
           />
         </div>
 
